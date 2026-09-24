@@ -1,7 +1,18 @@
-read -p "¿De que directorio quieres hacer la consulta?  " -r carpeta
-read -p "¿De que extension quieres hacer la cuenta?  " -r extension
+contar_por_extension () {
+    local carpeta="$1"
+    local extension="$2"
 
+    find "$carpeta" -maxdepth 1 -type f -name "*.$extension" | wc -l
+}
 
-find "$carpeta" -maxdepth 1 -type f -name "*.log" | wc -l
-find ~/prueba_bash/datos -maxdepth 1 -type f -name "*.txt" | wc -l
-find ~/prueba_bash/datos -maxdepth 1 -type f -name "*.csv" | wc -l
+ruta=~/prueba_bash/datos
+
+echo "Resultados:"
+
+# "Anotaciones para mi" Se declara la variable ext. En la primera vuelta valdrá
+# log, luego txt y finalmente csv
+for ext in log txt csv; do
+    cantidad=$(contar_por_extension "$ruta" "$ext")
+    
+    echo "$ext -> $cantidad"
+done
