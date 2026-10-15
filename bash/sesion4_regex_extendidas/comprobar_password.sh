@@ -5,38 +5,38 @@ if [[ -z "$1" ]]; then
     exit 1
 fi
 
-pass="$1"
+contra="$1"
 es_segura=true
 
-if [[ $pass =~ ^.{12,}$ ]]; then
+if [[ $contra =~ ^.{12,}$ ]]; then
     echo " Tiene al menos 12 caracteres: sí"
 else
     echo " Tiene al menos 12 caracteres: no"
     es_segura=false
 fi
 
-if [[ $pass =~ [0-9] ]]; then
+if [[ $contra =~ [0-9] ]]; then
     echo " Contiene algún dígito: sí"
 else
     echo " Contiene algún dígito: no"
     es_segura=false
 fi
 
-if [[ $pass =~ [A-Z] ]]; then
+if [[ $contra =~ [A-Z] ]]; then
     echo " Contiene alguna mayúscula: sí"
 else
     echo " Contiene alguna mayúscula: no"
     es_segura=false
 fi
 
-if [[ $pass =~ [^a-zA-Z0-9] ]]; then
+if [[ $contra =~ [^a-zA-Z0-9] ]]; then
     echo " Contiene algún símbolo: sí"
 else
     echo " Contiene algún símbolo: no"
     es_segura=false
 fi
 
-if grep -iqx "$pass" /usr/share/dict/spanish 2>/dev/null; then
+if grep -iqx "$contra" /usr/share/dict/spanish 2>/dev/null; then
     echo " No es una palabra del diccionario: no"
     es_segura=false
 else
