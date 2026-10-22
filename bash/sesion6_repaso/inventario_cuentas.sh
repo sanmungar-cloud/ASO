@@ -1,4 +1,7 @@
-!/bin/bash
+#!/bin/bash
+
+# Asignar el primer parámetro o usar /bin/bash por defecto
+shell="${1:-/bin/bash}"
 
 # Validar que sea una ruta absoluta en minúsculas
 if [[ ! "$shell" =~ ^(/[a-z]+)+$ ]]; then
