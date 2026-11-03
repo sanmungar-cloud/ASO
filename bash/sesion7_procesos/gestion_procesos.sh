@@ -45,7 +45,7 @@ cambiar_prioridad () {
     if [[ $EUID -eq 0 ]]; then
         if [[ ! "$valor_nice" =~ ^-?[0-9]+$ ]] || [[ "$valor_nice" -lt -20 ]] || [[ "$valor_nice" -gt 19 ]]; then
             echo "Error: el valor debe estar entre -20 y 19"
-            return 1 # Salimos de la función
+            return 1
         fi
     else
         if [[ ! "$valor_nice" =~ ^[0-9]+$ ]] || [[ "$valor_nice" -lt 0 ]] || [[ "$valor_nice" -gt 19 ]]; then
@@ -79,8 +79,7 @@ finalizar_proceso () {
         echo "Proceso $pid finalizado con SIGTERM"
         
         fecha=$(date "+%Y-%m-%d %H:%M:%S")
-        echo "$fecha - SIGTERM - $pid - $comando" >> ~/gestion_procesos.log
-        
+        echo "$fecha - SIGTERM - $pid - $comando" >> ~/gestion_procesos.log        
         sleep 3
         
         if ps -p "$pid" >/dev/null 2>&1; then
@@ -89,8 +88,7 @@ finalizar_proceso () {
             echo "El proceso $pid no respondió. Finalizado a la fuerza con SIGKILL."
             
             fecha=$(date "+%Y-%m-%d %H:%M:%S")
-            echo "$fecha - SIGKILL - $pid - $comando" >> ~/gestion_procesos.log
-        fi
+            echo "$fecha - SIGTERM - $pid - $comando" >> ~/gestion_procesos.log        fi
     else
         echo "Operación cancelada."
     fi
