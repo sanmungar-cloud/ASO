@@ -14,7 +14,6 @@ listar_usuario () {
 buscar_procesos () {
     read -p "Indica el nombre del proceso a buscar: " -r nombre
     
-    # pgrep busca los PID que coincidan con el nombre
     pids=$(pgrep "$nombre")
     
     if [[ -z "$pids" ]]; then
