@@ -1,5 +1,8 @@
 #!/bin/bash
 
+destino=~/backups/espejo
+mkdir -p "$destino"
+
 # Función para escribir en el archivo log
 registrar() {
     local estado="$1"
